@@ -1,0 +1,20 @@
+{
+  "extends": ["./node_modules/rete-cli/.eslintrc"],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "rules": {
+    "no-eq-null": "off",
+    "eqeqeq": "off",
+    "complexity": "off",
+    "no-undefined": "off",
+    "max-statements": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "no-console": "warn"
+  }
+}
