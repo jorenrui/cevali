@@ -1,0 +1,68 @@
+import { Callout } from 'nextra/components';
+
+# Getting Started
+
+## Installation
+
+Cevali is available as an [npm package](https://www.npmjs.com/package/cevali).
+
+```bash
+npm install --save cevali
+
+# or
+yarn add cevali
+```
+
+## Quick Start
+
+To get started, first you need to create a schema type:
+
+```js
+import { create, TYPE } from "cevali";
+
+const string = create('string', TYPE.string);
+```
+
+Then you can create your own validators such as validators for `email`, `minLength`, `maxLength`, and etc.
+
+<Callout type="info" emoji="ℹ️">
+  We plan on adding more validators examples in the docs soon.
+</Callout>
+
+```js
+const email = string.create((value: string, { message?: string } = {}) => {
+  if (!value.includes("@"))
+    throw new Error(message ?? "Invalid email");
+});
+
+const minLength = string.create((value: string, minLength: number, { message?: string } = {}) => {
+  if (value.length < minLength)
+    throw new Error(message ?? `Must be at least ${minLength} characters`);
+});
+
+const maxLength = string.create((value: string, maxLength: number, { message?: string } = {}) => {
+  if (value.length > maxLength)
+    throw new Error(message ?? `Must be at most ${maxLength} characters`);
+});
+```
+
+The first argument of `string.create` is the value in which you want to validate. The succeeding arguments are the optional options that you want to pass to the validator.
+
+After that, you can combine these validators into a single validator using by:
+
+```js
+const nameValidator = string([
+  minLength(3),
+  maxLength(20),
+]);
+```
+
+Then you can validate the value:
+
+```js
+try {
+  nameValidator("hello");
+} catch (error) {
+  console.log(error.message); // Must be at least 3 characters
+}
+```

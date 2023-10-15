@@ -1,0 +1,21 @@
+{
+  "index": {
+    "title": "Cevali",
+    "type": "page",
+    "display": "hidden"
+  },
+  "docs": {
+    "title": "Docs",
+    "type": "page"
+  },
+  "about": {
+    "title": "About",
+    "type": "page"
+  },
+  "contact": {
+    "title": "Contact ↗",
+    "type": "page",
+    "href": "https://twitter.com/jorenrui",
+    "newWindow": true
+  }
+}

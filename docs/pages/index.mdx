@@ -1,0 +1,121 @@
+import { IconFeather, IconArrowAutofitWidth, IconCubeSend, IconAtom2 } from '@tabler/icons-react';
+
+<h1 className="mt-8 text-6xl text-center font-bold tracking-tight text-slate-900 dark:text-slate-100">Cevali</h1>
+
+<p className="my-4 text-xl text-center text-slate-600">Enabling you to create and extend your validations.</p>
+
+<ul className="my-10 flex justify-between gap-2 text-lg">
+  <li className="flex items-center gap-2"><IconFeather className="h-6 w-6 text-slate-700" aria-hidden="true" /> Small bundle</li>
+  <li className="flex items-center gap-2"><IconArrowAutofitWidth className="h-6 w-6 text-slate-700" aria-hidden="true" /> Extensible</li>
+  <li className="flex items-center gap-2"><IconCubeSend className="h-6 w-6 text-slate-700" aria-hidden="true" /> TypeScript ready</li>
+  <li className="flex items-center gap-2"><IconAtom2 className="h-6 w-6 text-slate-700" aria-hidden="true" /> Framework Agnostic</li>
+</ul>
+
+Cevali is a small library that allows you to create validations for any types of data, from simple strings to class instances, or remix existing ones to create your own. It uses two APIs: `create` and `extend`.
+
+## Installation
+
+Cevali is available as an [npm package](https://www.npmjs.com/package/cevali).
+
+```bash
+npm install --save cevali
+
+# or
+
+yarn add cevali
+```
+
+## Overview
+
+```js
+import { create, extend, TYPE } from "cevali";
+
+// Create a schema type
+const string = create('string', TYPE.string);
+
+// Create your own validators
+const email = string.create((value: string, { message?: string } = {}) => {
+  if (!value.includes("@"))
+    throw new Error(message ?? "Invalid email");
+});
+const blocklisted = string.create((value: string, blocklisted: string[]) => {
+  if (blocklisted.includes(value))
+    throw new Error("Blocklisted word");
+});
+
+// Extend existing validators
+const extendedEmail = extend(email, (value: string, domainName: string, { message?: string } = {}) => {
+  if (!value.endsWith(`@${domainName}`))
+    throw new Error(message ?? "Invalid email");
+});
+
+// Create a pipe
+const validate = string([
+  extendedEmail(),
+  blocklisted(["boop@example.com", "bop@example.com"]),
+]);
+
+// Validate
+try {
+  validate("hello");
+} catch (error) {
+  console.log(error.message); // Invalid email
+}
+```
+
+Using `create`, you can create your own schema types, such as a `string` or `number`. It accepts an "id", a "type", and an optional converter function. The id is used to identify the schema type, and the type is used to validate the value.
+
+The schema type has a `create` method that allows you to create your own validators. It accepts a validator function. It should throw an error if the value is invalid.
+
+Using `extend`, you can extend existing validators. It accepts the validator you wish to extend and a validator function.
+
+Using the created schema type, in this case `string`, you can the validator by passing it an array of validators.
+
+With that, you can validate the value.
+
+## Custom Types
+
+You can even create your own custom types:
+
+```js
+import { create } from "cevali";
+
+class User {
+  name: string;
+  access: "admin" | "user" | "guest";
+
+  constructor(name: string, access: "admin" | "user" | "guest" = "guest") {
+    this.name = name;
+    this.access = access;
+  }
+}
+
+// A converted function is to be used to convert the value to the desired type.
+const userSchema = create("user", new User(''), (value) => {
+  if (typeof value === "string")
+    return new User(value);
+
+  if (!(value instanceof User))
+    throw new Error("Invalid user");
+
+  return value;
+});
+
+// Validators for the user schema type
+const isAdmin = userSchema.create((value: User) => {
+  if (value.access !== "admin")
+    throw new Error("Not admin");
+});
+
+const validate = userSchema([isAdmin()]);
+
+try {
+  validate(new User("john"));
+} catch (ex) {
+  console.log(ex.message); // Not admin
+}
+```
+
+---
+
+Cevali is licensed under the [MIT](https://github.com/jorenrui/cevali/blob/main/lib/LICENSE). Created as a personal project of [Joeylene](https://github.com/jorenrui).
