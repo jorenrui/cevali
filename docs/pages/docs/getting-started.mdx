@@ -30,17 +30,17 @@ Then you can create your own validators such as validators for `email`, `minLeng
 </Callout>
 
 ```js
-const email = string.create((value: string, { message?: string } = {}) => {
+const email = string.create((value: string, { message }: { message?: string } = {}) => {
   if (!value.includes("@"))
     throw new Error(message ?? "Invalid email");
 });
 
-const minLength = string.create((value: string, minLength: number, { message?: string } = {}) => {
+const minLength = string.create((value: string, minLength: number, opts: { message?: string } = {}) => {
   if (value.length < minLength)
     throw new Error(message ?? `Must be at least ${minLength} characters`);
 });
 
-const maxLength = string.create((value: string, maxLength: number, { message?: string } = {}) => {
+const maxLength = string.create((value: string, maxLength: number, opts: { message?: string } = {}) => {
   if (value.length > maxLength)
     throw new Error(message ?? `Must be at most ${maxLength} characters`);
 });
