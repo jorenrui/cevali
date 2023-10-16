@@ -4,7 +4,7 @@ Create, extend, and validate inputs in JavaScript. Cevali is a library that allo
 
 <p align="center">
   <a href="https://www.npmjs.com/package/cevali">
-    <img src="https://img.shields.io/badge/version-0.0.0" alt="Version" />
+    <img src="https://img.shields.io/badge/version-0.0.0-blue" alt="Version" />
   </a>
   <a href="https://github.com/jorenrui/cevali/tree/main/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License" />

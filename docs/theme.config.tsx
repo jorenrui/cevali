@@ -1,5 +1,5 @@
-import React from 'react'
-import { DocsThemeConfig } from 'nextra-theme-docs'
+import React from 'react';
+import { DocsThemeConfig } from 'nextra-theme-docs';
 
 const config: DocsThemeConfig = {
   logo: <span>Cevali</span>,
@@ -7,6 +7,11 @@ const config: DocsThemeConfig = {
     link: 'https://github.com/jorenrui/cevali',
   },
   docsRepositoryBase: 'https://github.com/jorenrui/cevali',
+  useNextSeoProps() {
+    return {
+      titleTemplate: '%s – Cevali'
+    }
+  },
   footer: {
     text: () => {
       return (
