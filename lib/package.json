@@ -1,6 +1,6 @@
 {
   "name": "cevali",
-  "version": "0.0.0",
+  "version": "0.0.0-rc.2",
   "description": "Create, extend, and validate inputs in JavaScript.",
   "module": "cevali.esm.js",
   "main": "cevali.common.js",
@@ -19,6 +19,9 @@
   ],
   "author": "Joeylene Rivera",
   "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.21.0"
+  },
   "devDependencies": {
     "rete-cli": "^1.0.1",
     "typescript": "4.8.4",

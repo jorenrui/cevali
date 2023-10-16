@@ -3,6 +3,7 @@ title: Mini Validation Library
 searchable: false
 ---
 
+import { Callout } from 'nextra/components';
 import { IconFeather, IconArrowAutofitWidth, IconCubeSend, IconAtom2 } from '@tabler/icons-react';
 
 <h1 className="mt-8 text-6xl text-center font-bold tracking-tight text-slate-900 dark:text-slate-100">Cevali</h1>
@@ -17,6 +18,10 @@ import { IconFeather, IconArrowAutofitWidth, IconCubeSend, IconAtom2 } from '@ta
 </ul>
 
 Cevali is a small library that allows you to create validations for any types of data, from simple strings to class instances, or remix existing ones to create your own. It uses two APIs: `create` and `extend`.
+
+<Callout type="warning" emoji="⚠️">
+  Not yet ready for production use.
+</Callout>
 
 ## Installation
 
@@ -39,9 +44,9 @@ import { create, extend, TYPE } from "cevali";
 const string = create('string', TYPE.string);
 
 // Create your own validators
-const email = string.create((value: string, { message?: string } = {}) => {
+const email = string.create((value: string, opts: { message?: string } = {}) => {
   if (!value.includes("@"))
-    throw new Error(message ?? "Invalid email");
+    throw new Error(opts.message ?? "Invalid email");
 });
 const blocklisted = string.create((value: string, blocklisted: string[]) => {
   if (blocklisted.includes(value))
@@ -49,9 +54,9 @@ const blocklisted = string.create((value: string, blocklisted: string[]) => {
 });
 
 // Extend existing validators
-const extendedEmail = extend(email, (value: string, domainName: string, { message?: string } = {}) => {
+const extendedEmail = extend(email, (value: string, domainName: string, opts: { message?: string } = {}) => {
   if (!value.endsWith(`@${domainName}`))
-    throw new Error(message ?? "Invalid email");
+    throw new Error(opts.message ?? "Invalid email");
 });
 
 // Create a pipe

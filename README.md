@@ -1,10 +1,12 @@
 # Cevali
 
-Create, extend, and validate inputs in JavaScript. Cevali is a library that allows you to create and extend validators to validate inputs.
+> Not yet ready for production use.
+
+Create, extend, and validate inputs in JavaScript. Cevali is a library that allows you to create and extend validators to validate inputs. See [docs](https://cevali.vercel.app/).
 
 <p align="center">
   <a href="https://www.npmjs.com/package/cevali">
-    <img src="https://img.shields.io/badge/version-0.0.0" alt="Version" />
+    <img src="https://img.shields.io/badge/version-0.0.0.rc-2-blue" alt="Version" />
   </a>
   <a href="https://github.com/jorenrui/cevali/tree/main/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License" />
