@@ -6,11 +6,7 @@
   "main": "cevali.common.js",
   "jsdelivr": "cevali.min.js",
   "unpkg": "cevali.min.js",
-  "types": "_types/index.d.ts",
-  "typings": "_types/index.d.ts",
-  "files": [
-    "/dist"
-  ],
+  "types": "./_types/index.d.ts",
   "scripts": {
     "bundle": "rm -rf ./dist && rete build -c rete.config.js",
     "copy": "cp package.json dist/ && cp README.md dist/ && cp LICENSE dist/",
